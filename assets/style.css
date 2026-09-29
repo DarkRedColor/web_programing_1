@@ -1,0 +1,282 @@
+/* Student Register: a school-register look.
+   Pale ruled paper, register-blue ink, one highlighter-yellow accent. */
+
+:root {
+    --paper: #eef1f5;
+    --sheet: #ffffff;
+    --ink: #1c2230;
+    --ink-soft: #566074;
+    --blue: #2447a8;
+    --blue-dark: #1a3480;
+    --rule: #cbd3df;
+    --highlight: #f2d14b;
+    --danger: #b3261e;
+
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 1.0625rem/1.55 var(--body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a { color: var(--blue); }
+a:hover { color: var(--blue-dark); }
+
+:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 2px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* Header */
+.site-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem clamp(1rem, 4vw, 3rem);
+    background: var(--sheet);
+    border-bottom: 1px solid var(--rule);
+}
+
+.brand {
+    font: 800 1.25rem/1 var(--display);
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.site-header nav { display: flex; gap: 1.5rem; }
+
+.site-header nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.25rem 0;
+    border-bottom: 2px solid transparent;
+}
+
+.site-header nav a:hover { color: var(--ink); }
+.site-header nav a[aria-current="page"] {
+    color: var(--ink);
+    border-bottom-color: var(--blue);
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
+}
+
+.site-footer {
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+}
+
+/* Buttons */
+.button {
+    display: inline-block;
+    padding: 0.7rem 1.3rem;
+    background: var(--blue);
+    color: #fff;
+    border: 2px solid var(--blue);
+    border-radius: 6px;
+    font: 600 1rem/1.2 var(--body);
+    text-decoration: none;
+    cursor: pointer;
+}
+.button:hover { background: var(--blue-dark); border-color: var(--blue-dark); color: #fff; }
+
+.button-quiet { background: transparent; color: var(--blue); }
+.button-quiet:hover { background: var(--sheet); color: var(--blue-dark); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+
+/* Welcome page: the headline sits on ruled register lines */
+.hero h1 {
+    font: 800 clamp(2.6rem, 7vw, 5rem)/1.05 var(--display);
+    letter-spacing: -0.02em;
+    max-width: 14ch;
+    margin: 0 0 1.5rem;
+    padding-bottom: 0.4rem;
+    background-image: linear-gradient(to bottom, transparent calc(100% - 2px), var(--rule) 0);
+    background-size: 100% 1.05em;
+}
+
+.lead { font-size: 1.25rem; color: var(--ink-soft); max-width: 36rem; margin: 0; }
+
+.tally {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: clamp(3rem, 8vw, 5rem);
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--ink);
+}
+
+.tally-count {
+    margin: 0;
+    font: 800 clamp(3rem, 8vw, 4.5rem)/1 var(--display);
+    background: linear-gradient(transparent 55%, var(--highlight) 55%);
+    padding: 0 0.15em;
+}
+
+.tally-text { margin: 0; max-width: 32rem; color: var(--ink-soft); }
+.tally-text strong { color: var(--ink); }
+
+/* Page titles */
+.page-title { font: 700 clamp(1.8rem, 4vw, 2.4rem)/1.15 var(--display); margin: 0 0 0.25rem; }
+.page-intro { margin: 0 0 2rem; color: var(--ink-soft); }
+
+/* Flash message */
+.flash {
+    margin: 0 0 2rem;
+    padding: 0.8rem 1rem;
+    background: var(--sheet);
+    border-left: 5px solid var(--highlight);
+    font-weight: 600;
+}
+
+/* Form */
+.form {
+    background: var(--sheet);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    max-width: 44rem;
+}
+
+.field { margin: 0 0 1.5rem; border: 0; padding: 0; min-width: 0; }
+.field-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0 1.5rem; }
+
+.field label,
+.field legend { display: block; font-weight: 600; margin-bottom: 0.4rem; padding: 0; }
+
+.field input[type="text"],
+.field input[type="email"],
+.field select,
+.search input {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    font: inherit;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-bottom: 2px solid var(--ink-soft);
+    border-radius: 4px 4px 0 0;
+}
+
+.field input:focus,
+.field select:focus,
+.search input:focus { border-bottom-color: var(--blue); outline: none; background: #f7f9fd; }
+
+.has-error input,
+.has-error select { border-bottom-color: var(--danger); }
+.error { color: var(--danger); font-size: 0.95rem; margin: 0.35rem 0 0; }
+
+/* Year of study: four boxes like register columns */
+.years { display: flex; gap: 0.5rem; }
+.year { position: relative; margin: 0 !important; }
+.year input { position: absolute; opacity: 0; }
+.year span {
+    display: grid;
+    place-items: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    font: 700 1.1rem var(--display);
+    cursor: pointer;
+    background: #fff;
+}
+.year input:checked + span { background: var(--blue); border-color: var(--blue); color: #fff; }
+.year input:focus-visible + span { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+/* Records page */
+.table-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+
+.search { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1.5rem; max-width: 40rem; }
+.search input { flex: 1; }
+.clear { white-space: nowrap; }
+
+.table-wrap {
+    overflow-x: auto;
+    background: var(--sheet);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.98rem; }
+
+th {
+    text-align: left;
+    font-weight: 600;
+    color: var(--ink-soft);
+    padding: 0.8rem 1rem;
+    border-bottom: 2px solid var(--ink);
+    white-space: nowrap;
+}
+
+td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: middle;
+}
+
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: #f7f9fd; }
+
+.num { text-align: center; }
+.code { font-weight: 600; letter-spacing: 0.03em; white-space: nowrap; }
+
+td form { margin: 0; }
+.link-danger {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: var(--danger);
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.empty {
+    background: var(--sheet);
+    border: 1px dashed var(--rule);
+    border-radius: 8px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+}
+.empty p { margin: 0; }
+#calculator_table {
+    border: 1px;
+    cellpadding: 5px;
+    border-collapse: separate;
+    border-spacing: 5px;
+    width: 600px;
+}
+#calculator_table tr {
+    align-items: center;
+}
+
