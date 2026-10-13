@@ -321,3 +321,32 @@ code {
     padding: 0.1em 0.35em;
     border-radius: 4px;
 }
+
+.two-column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.two-column .page-intro {
+    margin: 0;
+}
+.joke-delete {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    background: var(--danger);
+    color: #fff;
+    border: 2px solid var(--danger);
+    border-radius: 6px;
+    font: 600 0.9rem/1.2 var(--body);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.joke-delete:hover {
+    background: #8f1e18;
+    border-color: #8f1e18;
+}

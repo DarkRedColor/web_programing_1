@@ -13,7 +13,7 @@ class Joke extends Model
     ];
 
     /** Date the joke was added, e.g. "13 Oct 2026". */
-    public function postedOn(): string
+    public function addedOn(): string
     {
         return date('j M Y', strtotime($this->jokedate));
     }

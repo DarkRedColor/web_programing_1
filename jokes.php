@@ -13,9 +13,13 @@ require __DIR__ . '/includes/header.php';
 ?>
 
 <h1 class="page-title">Jokes</h1>
-<p class="page-intro">
-    <?= count($jokes) ?> <?= count($jokes) === 1 ? 'joke' : 'jokes' ?> on the register, newest first.
-</p>
+<div class="two-column">
+    <p class="page-intro">
+        <?= count($jokes) ?> <?= count($jokes) === 1 ? 'joke' : 'jokes' ?> on the register, newest first.
+    </p>
+    <a class="button" href='./jokesAdd.php'">Add a joke</a>
+</div>
+
 
 <?php if (!$jokes): ?>
     <div class="empty">
@@ -30,11 +34,34 @@ require __DIR__ . '/includes/header.php';
                 </blockquote>
                 <p class="joke-meta">
                     <span class="joke-number">#<?= (int) $joke->id ?></span>
-                    <time datetime="<?= e($joke->jokedate) ?>"><?= e($joke->postedOn()) ?></time>
+                    <time datetime="<?= e($joke->jokedate) ?>"><?= e($joke->addedOn()) ?></time>
+                    <button class="button joke-delete" data-id="<?= (int) $joke->id ?>">Delete</button>
                 </p>
             </li>
         <?php endforeach; ?>
     </ol>
 <?php endif; ?>
+
+<script>
+    const csrf = <?= json_encode(csrf_token()) ?>;
+
+    document.querySelectorAll('.joke-delete').forEach(button => {
+        button.addEventListener('click', async () => {
+            if (!confirm('Delete this joke?')) return;
+
+            const body = new FormData();
+            body.append('id', button.dataset.id);
+            body.append('csrf', csrf);
+
+            const response = await fetch('jokeDelete.php', { method: 'POST', body });
+
+            if (response.ok) {
+                button.closest('.joke').remove();   // remove the card from the page
+            } else {
+                alert('Could not delete the joke. Try reloading the page.');
+            }
+        });
+    });
+</script>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>
