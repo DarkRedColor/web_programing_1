@@ -269,14 +269,55 @@ td form { margin: 0; }
     text-align: center;
 }
 .empty p { margin: 0; }
-#calculator_table {
-    border: 1px;
-    cellpadding: 5px;
-    border-collapse: separate;
-    border-spacing: 5px;
-    width: 600px;
-}
-#calculator_table tr {
-    align-items: center;
+
+/* Jokes page: each joke is a sheet of paper on a ruled register line */
+.jokes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: 1.25rem;
 }
 
+.joke {
+    display: flex;
+    flex-direction: column;
+    background: var(--sheet);
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--blue);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.joke blockquote { margin: 0 0 1.25rem; flex: 1; }
+.joke blockquote p {
+    margin: 0;
+    font: 500 1.15rem/1.5 var(--display);
+}
+
+.joke-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+}
+
+.joke-number {
+    font-weight: 600;
+    color: var(--ink);
+    background: linear-gradient(transparent 55%, var(--highlight) 55%);
+    padding: 0 0.15em;
+}
+
+code {
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--paper);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+}

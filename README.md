@@ -5,6 +5,7 @@ A small PHP site for recording student data:
 - `index.php` – welcome page with a live count of recorded students
 - `add.php` – form to add a student (with validation)
 - `students.php` – table of all records, with search and remove
+- `jokes.php` – lists every row of the `joke` table, newest first
 
 Data is stored in MySQL. On first run the site creates the `student_register` database and the `students` table by itself. It connects as `root` with no password; change this in `config/db.php` if needed.
 
@@ -32,7 +33,8 @@ Make sure MySQL is running first. If you see "could not find driver", enable `ex
     │   │   ├── Model.php        Base model (find, create, save, delete…)
     │   │   └── QueryBuilder.php Builds safe SQL from chained calls
     │   └── Models/
-    │       └── Student.php      The students table as a class
+    │       ├── Student.php      The students table as a class
+    │       └── Joke.php         The joke table as a class
     ├── config/db.php        MySQL settings, database/table creation
     ├── includes/
     │   ├── helpers.php      Escaping, CSRF token, flash messages
